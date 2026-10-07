@@ -1,0 +1,6 @@
+.env
+.env.*
+node_modules/
+.vercel/
+*.log
+Thumbs.db

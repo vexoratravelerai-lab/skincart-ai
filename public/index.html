@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SkinCart AI — YouCam-powered shopping confidence</title>
+<style>
+:root{--bg:#0d1016;--card:#151a22;--line:#28313d;--text:#f7f8f2;--muted:#9ba6b5;--lime:#d8ff73;--violet:#a69cff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,rgba(166,156,255,.12),transparent 32%),var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+main{width:min(1160px,calc(100% - 32px));margin:auto}.top{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222a34}
+.brand{font-weight:900;letter-spacing:-.03em}.brand:before{content:"";display:inline-block;width:12px;height:12px;border-radius:4px;background:linear-gradient(135deg,var(--lime),var(--violet));margin-right:10px}
+.pill{font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted)}.pill.ok{color:#c8f7c5}.pill.warn{color:#ffe29b}
+.hero{padding:78px 0 48px;max-width:900px}.eyebrow{font-size:11px;letter-spacing:.17em;color:var(--lime);font-weight:900}
+h1{font-size:clamp(48px,7vw,84px);line-height:.94;letter-spacing:-.065em;margin:15px 0 22px}h1 span{color:var(--lime)}
+.lead{color:#bdc6d3;max-width:740px;font-size:18px;line-height:1.6}.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.badges span{font-size:11px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;color:#aeb8c6;background:#151a21}
+.grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;min-height:610px;box-shadow:0 25px 80px rgba(0,0,0,.3)}
+.step{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#202731;color:var(--lime);font-size:11px;font-weight:900}
+h2{font-size:26px;letter-spacing:-.035em;margin:19px 0 7px}.card p{color:var(--muted);line-height:1.55}
+.drop{margin-top:28px;min-height:185px;border:1px dashed #3c4758;border-radius:18px;background:#10151c;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer}
+.drop:hover{border-color:var(--lime)}.upload{width:46px;height:46px;border-radius:14px;background:var(--lime);color:#11170c;display:grid;place-items:center;font-size:22px;font-weight:900}
+.drop small{color:var(--muted)}.preview{margin-top:15px;border:1px solid var(--line);border-radius:16px;overflow:hidden}.preview img{width:100%;height:210px;object-fit:cover;display:block}
+.meta{padding:10px 12px;display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.meta button{border:0;background:none;color:var(--lime);cursor:pointer}
+button.action{width:100%;padding:14px;border-radius:13px;font-weight:900;margin-top:10px;border:1px solid transparent;cursor:pointer}.primary{background:var(--lime);color:#12170e}.secondary{background:#1b222b;color:#e6ebf2;border-color:#303a47!important}
+button:disabled{opacity:.38;cursor:not-allowed}.status{font-size:12px;min-height:20px}.error{color:#ff9e9e!important}.success{color:#c9f7c5!important}
+.results-head{display:flex;justify-content:space-between;gap:18px}.ring{width:82px;height:82px;flex:0 0 82px;border-radius:50%;border:8px solid var(--violet);display:grid;place-items:center;background:#10151b}.ring strong{font-size:22px}
+.empty{height:420px;border:1px dashed #303947;border-radius:18px;display:grid;place-items:center;color:#778393;margin-top:25px;text-align:center}.empty b{display:block;color:var(--violet);font-size:40px;margin-bottom:10px}
+.concerns{display:grid;gap:9px;margin-top:22px}.concern{padding:12px 13px;background:#10151b;border:1px solid #252e39;border-radius:13px}
+.row{display:flex;justify-content:space-between;font-size:13px}.row strong{font-size:15px}.bar{height:7px;background:#28313d;border-radius:99px;margin-top:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--lime))}
+.routine-title{margin:24px 0 10px;font-size:11px;color:var(--lime);font-weight:900;letter-spacing:.13em}.routine{display:grid;gap:8px}.product{display:grid;grid-template-columns:40px 1fr auto;gap:11px;align-items:center;background:#1b212a;border:1px solid #2b3441;border-radius:13px;padding:11px}
+.num{width:36px;height:36px;border-radius:10px;background:#252e39;display:grid;place-items:center;color:var(--lime);font-size:10px;font-weight:900}.product h4{margin:0 0 3px;font-size:14px}.product p{margin:0;font-size:11px}.product>strong{color:var(--violet)}
+.proof{margin:20px 0;padding:32px;border:1px solid var(--line);border-radius:22px;background:#12171e;display:grid;grid-template-columns:.7fr 1.3fr;gap:35px}.proof h3{font-size:31px;letter-spacing:-.04em;margin:8px 0}.proof p{margin:0;color:#aab4c2;line-height:1.65}
+footer{padding:30px 0 42px;display:flex;justify-content:space-between;color:#737e8e;font-size:11px}.hidden{display:none!important}
+@media(max-width:800px){.grid,.proof{grid-template-columns:1fr}.hero{padding-top:55px}h1{font-size:50px}.card{min-height:auto}.results-head{flex-direction:column}.ring{align-self:flex-end}footer{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body><main>
+<nav class="top"><div class="brand">SkinCart AI</div><span id="api" class="pill">Checking YouCam…</span></nav>
+<section class="hero"><div class="eyebrow">YOUCAM-POWERED BEAUTY COMMERCE</div><h1>Turn one selfie into a <span>smarter skincare cart.</span></h1>
+<p class="lead">SkinCart converts cosmetic skin signals into a simple, explainable shopping routine—without pretending to diagnose or treat a medical condition.</p>
+<div class="badges"><span>8 HD signals</span><span>Explainable cart</span><span>Server-side API key</span></div></section>
+<section class="grid">
+<article class="card"><div class="step">01</div><h2>Add a front-facing selfie</h2><p>Use clear, even lighting. SkinCart does not intentionally persist your upload.</p>
+<label class="drop"><input id="file" type="file" accept="image/jpeg,image/png" hidden><div class="upload">↥</div><strong>Choose an image</strong><small>JPG or PNG · under 8 MB</small></label>
+<div id="previewWrap" class="preview hidden"><img id="preview" alt="Preview"><div class="meta"><span id="name"></span><button id="remove">Remove</button></div></div>
+<button id="sample" class="action secondary">Use official YouCam sample</button><button id="analyze" class="action primary" disabled>Analyze & build my cart</button><p id="status" class="status"></p>
+</article>
+<article class="card"><div class="step">02</div><div class="results-head"><div><h2>Your shopping priorities</h2><p>Lower cosmetic scores are surfaced first so the cart focuses on the biggest opportunities.</p></div><div id="ring" class="ring hidden"><strong>—</strong></div></div>
+<div id="empty" class="empty"><div><b>✦</b>Your YouCam results will appear here.</div></div>
+<div id="results" class="hidden"><div id="concerns" class="concerns"></div><div class="routine-title">PERSONALIZED CART LOGIC</div><div id="routine" class="routine"></div></div>
+</article></section>
+<section class="proof"><div><div class="eyebrow">THE COMMERCE IDEA</div><h3>Less browsing. More confidence.</h3></div><p>A beauty retailer can use SkinCart as an explainable merchandising layer: rank needs, reduce redundant choices, and build a coherent routine around the shopper rather than a generic bestseller list.</p></section>
+<footer><span>SkinCart AI · YouCam API Hackathon 2026</span><span>Cosmetic guidance only — not medical advice.</span></footer>
+</main>
+<script>
+const $=s=>document.querySelector(s), file=$("#file"), preview=$("#preview"), wrap=$("#previewWrap"), analyze=$("#analyze"), status=$("#status");
+let chosen=null, chosenUrl=null; const sampleUrl="https://plugins-media.makeupar.com/strapi/assets/sample_Image_1_202b6bf6e6.jpg";
+function msg(t,c=""){status.textContent=t;status.className="status "+c}
+async function apiStatus(){try{const d=await fetch("/api/status").then(r=>r.json());$("#api").textContent=d.youcamConfigured?"YouCam connected":"YouCam key needed";$("#api").className="pill "+(d.youcamConfigured?"ok":"warn")}catch{$("#api").textContent="API status unavailable";$("#api").className="pill warn"}}
+function useFile(f){if(!f)return;if(!["image/jpeg","image/png"].includes(f.type))return msg("Choose JPG or PNG.","error");if(f.size>8*1024*1024)return msg("Use an image under 8 MB.","error");chosen=f;chosenUrl=null;preview.src=URL.createObjectURL(f);$("#name").textContent=f.name;wrap.classList.remove("hidden");analyze.disabled=false;msg("")}
+file.onchange=()=>useFile(file.files[0]);$("#remove").onclick=()=>{chosen=null;chosenUrl=null;file.value="";wrap.classList.add("hidden");analyze.disabled=true;msg("")};
+$("#sample").onclick=()=>{chosen=null;chosenUrl=sampleUrl;preview.src=sampleUrl;$("#name").textContent="Official YouCam sample";wrap.classList.remove("hidden");analyze.disabled=false;msg("Official sample selected.","success")};
+function to64(f){return new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(",")[1]);r.onerror=no;r.readAsDataURL(f)})}
+function render(d){const n=d.normalized||{}, cs=n.concerns||[], rt=n.routine||[];$("#empty").classList.add("hidden");$("#results").classList.remove("hidden");
+$("#concerns").innerHTML=cs.slice(0,6).map(x=>`<div class="concern"><div class="row"><span>${x.label}</span><strong>${x.uiScore}/100</strong></div><div class="bar"><i style="width:${Math.max(4,Math.min(100,x.uiScore))}%"></i></div></div>`).join("");
+$("#routine").innerHTML=rt.map((x,i)=>`<div class="product"><div class="num">0${i+1}</div><div><h4>${x.name}</h4><p>${x.reason}</p></div><strong>${x.score}</strong></div>`).join("");
+if(typeof n.overall==="number"){$("#ring").classList.remove("hidden");$("#ring strong").textContent=Math.round(n.overall)}}
+analyze.onclick=async()=>{if(!chosen&&!chosenUrl)return;analyze.disabled=true;msg("Running YouCam HD analysis… this may take up to two minutes.");
+try{const body=chosenUrl?{imageUrl:chosenUrl}:{imageBase64:await to64(chosen),fileName:chosen.name,mimeType:chosen.type};
+const r=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.error||"Analysis failed.");render(d);msg("Analysis complete. Your cart logic is ready.","success")}
+catch(e){msg(e.message||"Analysis failed.","error")}finally{analyze.disabled=false}};
+apiStatus();
+</script>
+</body></html>

@@ -1,0 +1,7 @@
+{
+  "name": "skincart-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "YouCam-powered cosmetic shopping confidence assistant for the 2026 YouCam API Hackathon.",
+  "engines": { "node": ">=18" }
+}
